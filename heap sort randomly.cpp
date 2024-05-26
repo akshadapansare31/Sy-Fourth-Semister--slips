@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<stdlib.h>
+void accept(int a[],int n)
+{
+	int i;
+	printf("\n enter value:");
+	for(i=0;i<n;i++)
+	{
+	a[i]=rand()%100;
+	printf("%d\t",a[i]);
+}
+}
+void disp(int a[],int n)
+{
+	int i;
+	printf("\n sorted array:");
+	for(i=0;i<n;i++)
+	printf("%d\t",a[i]);
+	
+}
+	void heapify(int a[],int i,int n)
+	{
+	int key=a[i];
+	int j=(2*i)+1;
+	if(j<=n && a[j]<a[j+1])
+	{
+	j=j+1;
+	}
+	if(j<=n && key<a[j])
+	{
+	int t=a[i];
+	a[i]=a[j];
+	a[j]=t;
+	heapify(a,j,n);
+	}
+}
+  void buildheap(int a[],int n)
+	{
+	int i;
+	for(i=n/2-1;i>=0;i--)
+	heapify(a,i,n-1);
+}
+    void heapsort(int a[],int n)
+	{
+	int last,top=0,temp;
+	buildheap(a,n);
+	printf("\n initial heap:");
+	disp(a,n);
+	for(last=n-1;last>=1;last--)
+	{
+	temp=a[top];
+	a[top]=a[last];
+	a[last]=temp;
+	printf("\n iteration %d:\t",n-last);
+	disp(a,n);
+	heapify(a,top,last-1);
+	}
+}
+	int main()
+	{
+	int a[100],n;
+	printf("\n enter limit:");
+	scanf("%d",&n);
+	accept(a,n);
+	//disp(a,n);
+	heapsort(a,n);
+	
+	}
